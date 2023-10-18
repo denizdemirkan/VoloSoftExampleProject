@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using ExampleProject.Localization;
 using ExampleProject.MultiTenancy;
+using ExampleProject.Permissions;
+using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Identity.Web.Navigation;
 using Volo.Abp.SettingManagement.Web.Navigation;
 using Volo.Abp.TenantManagement.Web.Navigation;
@@ -34,15 +36,18 @@ public class ExampleProjectMenuContributor : IMenuContributor
             ));
 
         context.Menu.AddItem(
-    new ApplicationMenuItem(
-        "BooksStore",
-        l["Menu:BookStore"],
-        icon: "fa fa-book"
-        ).AddItem(
             new ApplicationMenuItem(
-            "BooksStore.Books",
-            l["Menu:Books"],
-            url: "/Books")));
+                "BooksStore",
+                l["Menu:BookStore"],
+                icon: "fa fa-book"
+            ).AddItem(
+                new ApplicationMenuItem(
+                    "BooksStore.Books",
+                    l["Menu:Books"],
+                    url: "/Books"
+                ).RequirePermissions(ExampleProjectPermissions.Books.Default) // Check the permission!
+            )
+        );
 
 
         if (MultiTenancyConsts.IsEnabled)

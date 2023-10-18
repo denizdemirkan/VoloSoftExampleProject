@@ -1,35 +1,37 @@
 ﻿@page
 @using ExampleProject.Localization
 @using ExampleProject.Permissions
-@using ExampleProject.Web.Pages.Books
+@using ExampleProject.Web.Pages.Authors
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.Extensions.Localization
-@model IndexModel
 @inject IStringLocalizer<ExampleProjectResource> L
 @inject IAuthorizationService AuthorizationService
+@model IndexModel
+
 @section scripts
-{
-    <abp-script src="/Pages/Books/Index.js"/>
+    {
+    <abp-script src="/Pages/Authors/Index.js" />
 }
 
 <abp-card>
     <abp-card-header>
         <abp-row>
             <abp-column size-md="_6">
-                <abp-card-title>@L["Books"]</abp-card-title>
+                <abp-card-title>@L["Authors"]</abp-card-title>
             </abp-column>
             <abp-column size-md="_6" class="text-end">
-                @if (await AuthorizationService.IsGrantedAsync(ExampleProjectPermissions.Books.Create))
+                @if (await AuthorizationService
+                .IsGrantedAsync(ExampleProjectResource.Authors.Create))
                 {
-                    <abp-button id="NewBookButton"
-                                text="@L["NewBook"].Value"
+                    <abp-button id="NewAuthorButton"
+                                text="@L["NewAuthor"].Value"
                                 icon="plus"
-                                button-type="Primary"/>
+                                button-type="Primary" />
                 }
             </abp-column>
         </abp-row>
     </abp-card-header>
     <abp-card-body>
-        <abp-table striped-rows="true" id="BooksTable"></abp-table>
+        <abp-table striped-rows="true" id="AuthorsTable"></abp-table>
     </abp-card-body>
 </abp-card>

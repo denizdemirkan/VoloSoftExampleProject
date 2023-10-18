@@ -14,6 +14,16 @@ public class ExampleProjectPermissionDefinitionProvider : PermissionDefinitionPr
         booksPermission.AddChild(ExampleProjectPermissions.Books.Create, L("Permission:Books.Create"));
         booksPermission.AddChild(ExampleProjectPermissions.Books.Edit, L("Permission:Books.Edit"));
         booksPermission.AddChild(ExampleProjectPermissions.Books.Delete, L("Permission:Books.Delete"));
+
+        var authorsPermission = bookStoreGroup.AddPermission(
+            ExampleProjectPermissions.Authors.Default, L("Permission:Authors"));
+        authorsPermission.AddChild(
+            ExampleProjectPermissions.Authors.Create, L("Permission:Authors.Create"));
+        authorsPermission.AddChild(
+            ExampleProjectPermissions.Authors.Edit, L("Permission:Authors.Edit"));
+        authorsPermission.AddChild(
+            ExampleProjectPermissions.Authors.Delete, L("Permission:Authors.Delete"));
+
     }
 
     private static LocalizableString L(string name)
