@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExampleProject.Authors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace ExampleProject.Books
 
         public float Price { get; set; }
 
+        // Mappings
         public Guid AuthorId { get; set; }
-
     }
 }

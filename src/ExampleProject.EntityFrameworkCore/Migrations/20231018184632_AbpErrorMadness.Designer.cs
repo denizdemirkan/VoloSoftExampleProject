@@ -13,8 +13,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace ExampleProject.Migrations
 {
     [DbContext(typeof(SqlServerBookStoreDbContext))]
-    [Migration("20231018161012_Added_AuthorId_To_Book")]
-    partial class AddedAuthorIdToBook
+    [Migration("20231018184632_AbpErrorMadness")]
+    partial class AbpErrorMadness
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

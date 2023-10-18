@@ -13,8 +13,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace ExampleProject.Migrations
 {
     [DbContext(typeof(SqlServerBookStoreDbContext))]
-    [Migration("20231018150806_Added_Authors")]
-    partial class AddedAuthors
+    [Migration("20231018185742_SqlExceptionRollBack")]
+    partial class SqlExceptionRollBack
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,6 +98,9 @@ namespace ExampleProject.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
@@ -141,6 +144,8 @@ namespace ExampleProject.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("AppBooks", (string)null);
                 });
@@ -1872,6 +1877,15 @@ namespace ExampleProject.Migrations
                     b.HasKey("TenantId", "Name");
 
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
+                });
+
+            modelBuilder.Entity("ExampleProject.Books.Book", b =>
+                {
+                    b.HasOne("ExampleProject.Authors.Author", null)
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>
