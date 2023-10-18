@@ -20,5 +20,9 @@ namespace ExampleProject.Books
 
         [Required]
         public float Price { get; set; }
+
+        // Mappings
+        public Guid AuthorId { get; set; }
+
     }
 }

@@ -14,5 +14,9 @@ namespace ExampleProject.Books
         public DateTime PublishDate { get; set; }
 
         public float Price { get; set; }
+
+        // Mappings
+        public Guid AuthorId { get; set; }
+        public string AuthorName { get; set; }
     }
 }
