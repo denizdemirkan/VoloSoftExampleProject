@@ -19,7 +19,7 @@ $(function () {
                             [
                                 {
                                     text: l('Edit'),
-                                    visible: abp.auth.isGranted('ExampleProject.Books.Edit'), //CHECK for the PERMISSION
+                                    visible: abp.auth.isGranted('ExampleProject.Books.Edit'),
                                     action: function (data) {
                                         editModal.open({ id: data.record.id });
                                     }
@@ -46,23 +46,11 @@ $(function () {
                     title: l('Name'),
                     data: "name"
                 },
-                {
-                    title: l('Name'),
-                    data: "name"
-                },
 
                 // ADDED the NEW AUTHOR NAME COLUMN
                 {
                     title: l('Author'),
                     data: "authorName"
-                },
-
-                {
-                    title: l('Type'),
-                    data: "type",
-                    render: function (data) {
-                        return l('Enum:BookType.' + data);
-                    }
                 },
                 {
                     title: l('Type'),
