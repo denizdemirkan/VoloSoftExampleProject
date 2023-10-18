@@ -37,6 +37,8 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using ExampleProject.Permissions;
 
 namespace ExampleProject.Web;
 
@@ -84,6 +86,13 @@ public class ExampleProjectWebModule : AbpModule
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
+
+        Configure<RazorPagesOptions>(options =>
+        {
+            options.Conventions.AuthorizePage("/Books/Index", ExampleProjectPermissions.Books.Default);
+            options.Conventions.AuthorizePage("/Books/CreateModal", ExampleProjectPermissions.Books.Create);
+            options.Conventions.AuthorizePage("/Books/EditModal", ExampleProjectPermissions.Books.Edit);
+        });
 
         ConfigureAuthentication(context);
         ConfigureUrls(configuration);

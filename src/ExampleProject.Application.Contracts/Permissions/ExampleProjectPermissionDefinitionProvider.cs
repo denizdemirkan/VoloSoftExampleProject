@@ -8,9 +8,12 @@ public class ExampleProjectPermissionDefinitionProvider : PermissionDefinitionPr
 {
     public override void Define(IPermissionDefinitionContext context)
     {
-        var myGroup = context.AddGroup(ExampleProjectPermissions.GroupName);
-        //Define your own permissions here. Example:
-        //myGroup.AddPermission(ExampleProjectPermissions.MyPermission1, L("Permission:MyPermission1"));
+        var bookStoreGroup = context.AddGroup(ExampleProjectPermissions.GroupName, L("Permission:BookStore"));
+
+        var booksPermission = bookStoreGroup.AddPermission(ExampleProjectPermissions.Books.Default, L("Permission:Books"));
+        booksPermission.AddChild(ExampleProjectPermissions.Books.Create, L("Permission:Books.Create"));
+        booksPermission.AddChild(ExampleProjectPermissions.Books.Edit, L("Permission:Books.Edit"));
+        booksPermission.AddChild(ExampleProjectPermissions.Books.Delete, L("Permission:Books.Delete"));
     }
 
     private static LocalizableString L(string name)
