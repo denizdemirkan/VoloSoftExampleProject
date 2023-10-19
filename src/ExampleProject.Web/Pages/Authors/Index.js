@@ -20,7 +20,7 @@ $(function () {
                                 {
                                     text: l('Edit'),
                                     visible:
-                                        abp.auth.isGranted('ExampleProject.Authors.Edit'),
+                                        abp.auth.isGranted('BookStore.Authors.Edit'),
                                     action: function (data) {
                                         editModal.open({ id: data.record.id });
                                     }
@@ -28,7 +28,7 @@ $(function () {
                                 {
                                     text: l('Delete'),
                                     visible:
-                                        abp.auth.isGranted('ExampleProject.Authors.Delete'),
+                                        abp.auth.isGranted('BookStore.Authors.Delete'),
                                     confirmMessage: function (data) {
                                         return l(
                                             'AuthorDeletionConfirmationMessage',

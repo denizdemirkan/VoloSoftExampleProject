@@ -35,19 +35,6 @@ public class ExampleProjectMenuContributor : IMenuContributor
                 order: 0
             ));
 
-        context.Menu.AddItem(
-            new ApplicationMenuItem(
-                "BooksStore",
-                l["Menu:BookStore"],
-                icon: "fa fa-book"
-            ).AddItem(
-                new ApplicationMenuItem(
-                    "BooksStore.Books",
-                    l["Menu:Books"],
-                    url: "/Books"
-                ).RequirePermissions(ExampleProjectPermissions.Books.Default) // Check the permission!
-            ));
-
                 context.Menu.AddItem(
         new ApplicationMenuItem(
             "BooksStore",
