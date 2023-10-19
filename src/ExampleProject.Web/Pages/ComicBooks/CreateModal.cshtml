@@ -1,0 +1,24 @@
+﻿@page
+@using ExampleProject.Web.Pages.ComicBooks;
+@using ExampleProject.Localization
+@using ExampleProject.Web.Pages.ComicBooks
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model CreateModalModel
+@inject IStringLocalizer<ExampleProjectResource> L
+@{
+    Layout = null;
+}
+<form asp-page="/ComicBooks/CreateModal">
+    <abp-modal>
+        <abp-modal-header title="@L["NewComicBook"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-input asp-for="ComicBook.Name" />
+            <abp-input asp-for="ComicBook.Type" />
+            <abp-input asp-for="ComicBook.PageCount" />
+            <abp-input asp-for="ComicBook.Price" />
+            <abp-input asp-for="ComicBook.PublishDate" />
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>

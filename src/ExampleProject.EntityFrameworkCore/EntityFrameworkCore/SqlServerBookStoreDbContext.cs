@@ -1,5 +1,6 @@
 ﻿using ExampleProject.Authors;
 using ExampleProject.Books;
+using ExampleProject.ComicBooks;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -30,6 +31,8 @@ public class SqlServerBookStoreDbContext :
 
     public DbSet<Book> Books { get; set; }
     public DbSet<Author> Authors { get; set; }
+
+    public DbSet<ComicBook> ComicBooks { get; set; }
 
     #region Entities from the modules
 
@@ -91,6 +94,13 @@ public class SqlServerBookStoreDbContext :
 
             // ADD THE MAPPING FOR THE RELATION
             b.HasOne<Author>().WithMany().HasForeignKey(x => x.AuthorId).IsRequired();
+        });
+
+        builder.Entity<Book>(b =>
+        {
+            b.ToTable(ExampleProjectConsts.DbTablePrefix + "ComicBooks", ExampleProjectConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
         });
 
         builder.Entity<Author>(b =>

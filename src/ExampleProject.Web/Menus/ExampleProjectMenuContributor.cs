@@ -52,6 +52,12 @@ public class ExampleProjectMenuContributor : IMenuContributor
                 l["Menu:Authors"],
                 url: "/Authors"
             ).RequirePermissions(ExampleProjectPermissions.Authors.Default)
+         ).AddItem( // ADDED THE NEW "ComicBooks" MENU ITEM UNDER THE "BOOK STORE" MENU
+            new ApplicationMenuItem(
+                "BooksStore.ComicBooks",
+                l["Menu:ComicBooks"],
+                url: "/ComicBooks"
+            ).RequirePermissions(ExampleProjectPermissions.ComicBooks.Default)
          )
         );
 

@@ -24,6 +24,15 @@ public class ExampleProjectPermissionDefinitionProvider : PermissionDefinitionPr
         authorsPermission.AddChild(
             ExampleProjectPermissions.Authors.Delete, L("Permission:Authors.Delete"));
 
+        var comicBooksPermission = bookStoreGroup.AddPermission(
+    ExampleProjectPermissions.ComicBooks.Default, L("Permission:ComicBooks"));
+        comicBooksPermission.AddChild(
+            ExampleProjectPermissions.ComicBooks.Create, L("Permission:ComicBooks.Create"));
+        comicBooksPermission.AddChild(
+            ExampleProjectPermissions.ComicBooks.Edit, L("Permission:ComicBooks.Edit"));
+        comicBooksPermission.AddChild(
+            ExampleProjectPermissions.ComicBooks.Delete, L("Permission:ComicBooks.Delete"));
+
     }
 
     private static LocalizableString L(string name)

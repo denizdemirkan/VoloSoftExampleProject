@@ -1,16 +1,16 @@
 $(function () {
     var l = abp.localization.getResource('BookStore');
-    var createModal = new abp.ModalManager(abp.appPath + 'Authors/CreateModal');
-    var editModal = new abp.ModalManager(abp.appPath + 'Authors/EditModal');
+    var createModal = new abp.ModalManager(abp.appPath + 'ComicBooks/CreateModal');
+    var editModal = new abp.ModalManager(abp.appPath + 'ComicBooks/EditModal');
 
-    var dataTable = $('#AuthorsTable').DataTable(
+    var dataTable = $('#ComicBooksTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
             serverSide: true,
             paging: true,
             order: [[1, "asc"]],
             searching: false,
             scrollX: true,
-            ajax: abp.libs.datatables.createAjax(exampleProject.authors.author.getList),
+            ajax: abp.libs.datatables.createAjax(exampleProject.comicBooks.comicBook.getList),
             columnDefs: [
                 {
                     title: l('Actions'),
@@ -20,7 +20,7 @@ $(function () {
                                 {
                                     text: l('Edit'),
                                     visible:
-                                        abp.auth.isGranted('BookStore.Authors.Edit'),
+                                        abp.auth.isGranted('BookStore.ComicBooks.Edit'),
                                     action: function (data) {
                                         editModal.open({ id: data.record.id });
                                     }
@@ -28,7 +28,7 @@ $(function () {
                                 {
                                     text: l('Delete'),
                                     visible:
-                                        abp.auth.isGranted('BookStore.Authors.Delete'),
+                                        abp.auth.isGranted('BookStore.ComicBooks.Delete'),
                                     confirmMessage: function (data) {
                                         return l(
                                             'AuthorDeletionConfirmationMessage',
@@ -36,7 +36,7 @@ $(function () {
                                         );
                                     },
                                     action: function (data) {
-                                        exampleProject.authors.author
+                                        exampleProject.comicBooks.comicBook
                                             .delete(data.record.id)
                                             .then(function () {
                                                 abp.notify.info(
@@ -54,16 +54,25 @@ $(function () {
                     data: "name"
                 },
                 {
-                    title: l('BirthDate'),
-                    data: "birthDate",
+                    title: l('Type'),
+                    data: "type",
                     render: function (data) {
-                        return luxon
-                            .DateTime
-                            .fromISO(data, {
-                                locale: abp.localization.currentCulture.name
-                            }).toLocaleString();
+                        return l('Enum:PublisherType.' + data);
                     }
-                }
+                },
+                {
+                    title: l('PageCount'),
+                    data: "pageCount"
+                },
+                {
+                    title: l('PublishDate'),
+                    data: "publishDate",
+                    dataFormat: "datetime"
+                },
+                {
+                    title: l('Price'),
+                    data: "price"
+                },
             ]
         })
     );
@@ -76,7 +85,7 @@ $(function () {
         dataTable.ajax.reload();
     });
 
-    $('#NewAuthorButton').click(function (e) {
+    $('#NewComicBookButton').click(function (e) {
         e.preventDefault();
         createModal.open();
     });
