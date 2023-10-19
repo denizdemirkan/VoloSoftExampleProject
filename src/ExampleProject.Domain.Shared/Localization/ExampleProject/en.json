@@ -41,7 +41,14 @@
     "Authors": "Authors",
     "AuthorDeletionConfirmationMessage": "Are you sure to delete the author '{0}'?",
     "BirthDate": "Birth date",
-    "NewAuthor": "New author"
+    "NewAuthor": "New author",
+    "Enum:PublisherType.0": "Undefined",
+    "Enum:PublisherType.1": "DC Comics",
+    "Enum:PublisherType.2": "Marvel Comics",
+    "Enum:PublisherType.3": "Penguen",
+    "Enum:PublisherType.4": "Leman",
+    "Menu:ComicBooks": "Comic Books",
+    "NewComicBook": "New comic book"
   }
 }
 

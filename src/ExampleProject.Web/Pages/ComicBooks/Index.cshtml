@@ -1,0 +1,37 @@
+﻿@page
+@using ExampleProject.Localization
+@using ExampleProject.Permissions
+@using ExampleProject.Web.Pages.ComicBooks
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<ExampleProjectResource> L
+@inject IAuthorizationService AuthorizationService
+@model IndexModel
+
+@section scripts
+    {
+    <abp-script src="/Pages/ComicBooks/Index.js" />
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["ComicBooks"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                @if (await AuthorizationService
+                .IsGrantedAsync(ExampleProjectPermissions.ComicBooks.Create))
+                {
+                    <abp-button id="NewComicBookButton"
+                                text="@L["NewComicBook"].Value"
+                                icon="plus"
+                                button-type="Primary" />
+                }
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="ComicBooksTable"></abp-table>
+    </abp-card-body>
+</abp-card>
