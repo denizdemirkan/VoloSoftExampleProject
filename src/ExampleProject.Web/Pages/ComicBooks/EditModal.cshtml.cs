@@ -11,6 +11,7 @@ using ExampleProject.ComicBooks;
 using AutoMapper;
 using ExampleProject.Authors;
 using static ExampleProject.Web.Pages.Authors.EditModalModel;
+using static ExampleProject.Web.Pages.ComicBooks.CreateModalModel;
 
 namespace ExampleProject.Web.Pages.ComicBooks
 {
@@ -43,9 +44,16 @@ namespace ExampleProject.Web.Pages.ComicBooks
 
         public async Task<IActionResult> OnPostAsync()
         {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CreateComicBookViewModel, CreateUpdateComicBookDto>();
+            });
+
+            var mapper = config.CreateMapper();
+
             await _comicBookAppService.UpdateAsync(
                 ComicBook.Id,
-                ObjectMapper.Map<EditComicBookViewModel, CreateUpdateComicBookDto>(ComicBook)
+                mapper.Map<EditComicBookViewModel, CreateUpdateComicBookDto>(ComicBook)
             );
 
             return NoContent();

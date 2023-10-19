@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 using ExampleProject.Web.Pages;
 using ExampleProject.ComicBooks;
+using AutoMapper;
 
 namespace ExampleProject.Web.Pages.ComicBooks;
 
@@ -29,7 +30,14 @@ public class CreateModalModel : ExampleProjectPageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        var dto = ObjectMapper.Map<CreateComicBookViewModel, CreateUpdateComicBookDto>(ComicBook);
+        var config = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<CreateComicBookViewModel, CreateUpdateComicBookDto>();
+        });
+
+        var mapper = config.CreateMapper();
+
+        var dto = mapper.Map<CreateComicBookViewModel, CreateUpdateComicBookDto>(ComicBook);
         await _comicBookAppService.CreateAsync(dto);
         return NoContent();
     }

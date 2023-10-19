@@ -6,6 +6,7 @@ using AutoMapper.Internal.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 using ExampleProject.Web.Pages;
+using AutoMapper;
 
 namespace ExampleProject.Web.Pages.Authors;
 
@@ -28,7 +29,15 @@ public class CreateModalModel : ExampleProjectPageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        var dto = ObjectMapper.Map<CreateAuthorViewModel, CreateAuthorDto>(Author);
+
+        var config = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<CreateAuthorViewModel, CreateAuthorDto>();
+        });
+
+        var mapper = config.CreateMapper();
+
+        var dto = mapper.Map<CreateAuthorViewModel, CreateAuthorDto>(Author);
         await _authorAppService.CreateAsync(dto);
         return NoContent();
     }
